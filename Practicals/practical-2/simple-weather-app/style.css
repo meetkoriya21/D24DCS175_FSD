@@ -1,0 +1,70 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.weather-app {
+  background-color: #b33a3a;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-app h2 {
+  margin-bottom: 20px;
+}
+
+.weather-app input {
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+  width: 200px;
+  text-align: center;
+}
+
+.weather-app button {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.weather-app button:hover {
+  background-color: #333333;
+}
+
+.weather-app p {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.suggestions {
+  position: absolute;
+  background-color: white;
+  color: black;
+  width: 200px;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1000;
+  display: none;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #ddd;
+}

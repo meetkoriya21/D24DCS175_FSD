@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Upload</title>
+</head>
+<body>
+  <h1>Upload Your Resume (PDF only, max 2MB)</h1>
+  <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/upload">
+    <input type="file" name="resume" accept="application/pdf" required />
+    <button type="submit">Upload</button>
+  </form>
+  <p id="message"></p>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      message.textContent = '';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          const text = await response.text();
+          message.style.color = 'green';
+          message.textContent = text;
+        } else {
+          const text = await response.text();
+          message.style.color = 'red';
+          message.textContent = text;
+        }
+      } catch (error) {
+        message.style.color = 'red';
+        message.textContent = 'Error uploading file.';
+      }
+    });
+  </script>
+</body>
+</html>

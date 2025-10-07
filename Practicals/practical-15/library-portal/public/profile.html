@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library Portal - Profile</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .profile-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+    }
+    .profile-icon {
+      font-size: 4em;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 30px;
+      color: #4a5568;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .session-info {
+      background: #f7fafc;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border: 2px solid #e2e8f0;
+    }
+    .session-info p {
+      margin: 15px 0;
+      font-size: 18px;
+      color: #2d3748;
+    }
+    .session-info span {
+      font-weight: bold;
+      color: #667eea;
+    }
+    .logout-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+    }
+    .loading {
+      display: none;
+      font-size: 18px;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-icon">👤</div>
+    <h1>Your Profile</h1>
+    <div id="session-info" class="session-info">
+      <p>Loading session information...</p>
+    </div>
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+
+  <script>
+    // Fetch session info from server
+    fetch('/session-info')
+      .then(response => response.json())
+      .then(data => {
+        const sessionInfo = document.getElementById('session-info');
+        if (data.user) {
+          sessionInfo.innerHTML = `
+            <p>Name: <span>${data.user.name}</span></p>
+            <p>Login Time: <span>${new Date(data.user.loginTime).toLocaleString()}</span></p>
+          `;
+        } else {
+          window.location.href = '/';
+        }
+      })
+      .catch(() => {
+        window.location.href = '/';
+      });
+  </script>
+</body>
+</html>

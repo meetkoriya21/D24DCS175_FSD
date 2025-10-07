@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form class="contact-form" action="/contact" method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+        <div id="response-message"></div>
+    </form>
+    <script>
+        document.querySelector('.contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(formData),
+            });
+            const result = await response.json();
+            const messageDiv = document.getElementById('response-message');
+            messageDiv.className = `message ${result.success ? 'success' : 'error'}`;
+            messageDiv.textContent = result.message;
+        });
+    </script>
+</body>
+</html>
+
+    </form>
+    <div id="response-message"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

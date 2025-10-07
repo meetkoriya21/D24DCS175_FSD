@@ -1,0 +1,13 @@
+.main-content {
+  margin-left: 60px; /* reduced margin to allow more width */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #333;
+}
